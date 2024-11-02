@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Slender Man Clone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <canvas id="myCanvas"></canvas>
+  <script src="js/game.js"></script>
+  <script src="js/player.js"></script>
+  <script>
+    const myCanvas = document.getElementById("myCanvas");
+    myCanvas.width = window.innerWidth;
+    myCanvas.height = window.innerHeight;
+
+    const game = new Game(myCanvas);
+    game.update();
+  </script>
+</body>
+
+</html>
