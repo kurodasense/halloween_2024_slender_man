@@ -7,6 +7,8 @@ class Game {
       y: this.canvas.height / 2,
     };
     this.player = new Player(center);
+    this.camera = new Camera(center, this.player);
+
     const areaSize = 1000;
     const bounds = {
       top: center.y - areaSize / 2,
@@ -26,6 +28,8 @@ class Game {
   #animate() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.player.update();
+    this.camera.update();
+    this.camera.draw(this.ctx);
     this.player.draw(this.ctx);
     this.trees.forEach((tree) => tree.draw(this.ctx));
     requestAnimationFrame(() => this.#animate());
