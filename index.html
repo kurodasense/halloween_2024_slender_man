@@ -10,13 +10,15 @@
   <canvas id="myCanvas"></canvas>
   <script src="js/game.js"></script>
   <script src="js/player.js"></script>
+  <script src="js/controls.js"></script>
+
   <script>
     const myCanvas = document.getElementById("myCanvas");
     myCanvas.width = window.innerWidth;
     myCanvas.height = window.innerHeight;
 
     const game = new Game(myCanvas);
-    game.update();
+    game.start();
   </script>
 </body>
 
