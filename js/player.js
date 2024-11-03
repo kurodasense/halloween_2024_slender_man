@@ -6,8 +6,8 @@ class Player {
     this.speed = 0;
     this.maxSpeed = 5;
     this.friction = 0.4;
-    this.directionChange = 0.05;
-    this.speedChange = 0.6;
+    this.directionChange = 0.02;
+    this.speedChange = 0.5;
     this.epsilon = 0.01;
 
     this.controls = new Controls();

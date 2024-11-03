@@ -4,6 +4,10 @@ body {
   padding: 0;
 
 }
-canvas {
+#topCanvas {
   background-color: #000;
+}
+
+#topCanvas {
+  background-color: grey;
 }

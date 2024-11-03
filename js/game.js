@@ -1,10 +1,14 @@
 class Game {
-  constructor(canvas) {
-    this.canvas = canvas;
-    this.ctx = canvas.getContext("2d");
+  constructor(topCanvas, cameraCanvas) {
+    this.topCanvas = topCanvas;
+    this.topCtx = topCanvas.getContext("2d");
+
+    this.cameraCanvas = cameraCanvas;
+    this.cameraCtx = cameraCanvas.getContext("2d");
+
     const center = {
-      x: this.canvas.width / 2,
-      y: this.canvas.height / 2,
+      x: this.topCanvas.width / 2,
+      y: this.topCanvas.height / 2,
     };
     this.player = new Player(center);
     this.camera = new Camera(center, this.player);
@@ -25,13 +29,35 @@ class Game {
     this.#animate();
   }
 
-  #animate() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  #update() {
     this.player.update();
-    this.camera.update();
-    this.camera.draw(this.ctx);
-    this.player.draw(this.ctx);
-    this.trees.forEach((tree) => tree.draw(this.ctx));
+    return this.camera.update();
+  }
+
+  #draw() {
+    this.topCtx.clearRect(0, 0, this.topCanvas.width, this.topCanvas.height);
+    this.cameraCtx.clearRect(
+      0,
+      0,
+      this.cameraCanvas.width,
+      this.cameraCanvas.height
+    );
+    this.player.draw(this.topCtx);
+    this.camera.draw(this.topCtx);
+    this.trees.forEach((tree) => tree.draw(this.topCtx));
+  }
+
+  #render(fov) {
+    const centers = this.trees.map((tree) => tree.center);
+    const inView = centers.filter((center) => pointInTriangle(center, fov));
+    this.camera.render(this.cameraCtx, inView);
+  }
+
+  #animate() {
+    const fov = this.#update();
+    this.#draw();
+    this.#render(fov);
+
     requestAnimationFrame(() => this.#animate());
   }
 

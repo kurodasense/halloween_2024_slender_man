@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <canvas id="myCanvas"></canvas>
+  <canvas id="topCanvas"></canvas><canvas id="cameraCanvas"></canvas>
   <script src="js/game.js"></script>
   <script src="js/player.js"></script>
   <script src="js/controls.js"></script>
@@ -16,11 +16,17 @@
   <script src="js/camera.js"></script>
 
   <script>
-    const myCanvas = document.getElementById("myCanvas");
-    myCanvas.width = window.innerWidth;
-    myCanvas.height = window.innerHeight;
+    const topCanvas = document.getElementById("topCanvas");
+    const cameraCanvas = document.getElementById("cameraCanvas");
 
-    const game = new Game(myCanvas);
+    topCanvas.width = window.innerWidth / 2;
+    topCanvas.height = window.innerHeight;
+
+    cameraCanvas.width = window.innerWidth / 2;
+    cameraCanvas.height = window.innerHeight;
+
+
+    const game = new Game(topCanvas, cameraCanvas);
     game.start();
   </script>
 </body>
